@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Artificial Intelligence — Case Study
 ## 8-Puzzle Problem using Depth First Search (DFS)
 Name:  Medha Goel
@@ -35,7 +35,7 @@ Use digits `0` through `8` exactly once in each state. `0` represents the blank 
 - DFS is the only search algorithm implemented in this individual project.
 - Other algorithms on the comparison page are qualitative references, not executed benchmarks.
 - The DFS implementation has a 40,000-expanded-node safety limit to avoid freezing the browser on difficult searches.
-=======
+
 # DFS-8-Puzzle-Solver
 An 8-puzzle solver using Depth-First Search (DFS) to find a path from an initial state to the goal state.
->>>>>>> ea9ef6732db8f1338c6e4dbb8ddad8ffd99e1159
+
