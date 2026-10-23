@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#eaf5e8" />
+  <title>Artificial Intelligence — Case Study | Medha Goel</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#home" data-page="home" aria-label="Eightfold home">
+        <span class="brand-mark">8</span><span><strong>8-Puzzle</strong><small>DFS CASE STUDY</small></span>
+      </a>
+      <div class="side-label">PROJECT</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-item active" data-page="home"><span class="nav-icon">⌂</span>Home</button>
+        <button class="nav-item" data-page="lab"><span class="nav-icon">▦</span>Puzzle lab</button>
+        <button class="nav-item" data-page="process"><span class="nav-icon">⌘</span>Search process</button>
+        <button class="nav-item" data-page="comparison"><span class="nav-icon">▤</span>Algorithm comparison</button>
+        <button class="nav-item" data-page="guide"><span class="nav-icon">✳</span>Algorithm guide</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="assignment-chip"><span class="status-dot"></span><div><strong>Assigned algorithm</strong><small>Depth First Search</small></div></div>
+        <div class="side-note">A small space to explore how an AI search algorithm thinks.</div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar"><div class="breadcrumb"><span>ARTIFICIAL INTELLIGENCE</span><span class="crumb-slash">/</span><strong id="pageCrumb">Home</strong></div><div class="topbar-right"><span class="live-pill"><span class="status-dot"></span>Algorithm 2: DFS</span></div></header>
+
+      <section class="page active" id="page-home">
+        <div class="home-cover">
+          <div class="cover-mark" aria-hidden="true">8</div>
+          <p class="eyebrow">ARTIFICIAL INTELLIGENCE</p>
+          <h1>Case Study</h1>
+          <div class="cover-rule"></div>
+          <p class="cover-subtitle">8-Puzzle Problem using Depth First Search (DFS)</p>
+          <p class="cover-student">Medha Goel</p>
+          <button class="btn btn-dark" data-go="lab">Open the 8-puzzle solver <span>→</span></button>
+        </div>
+        <div class="intro-simple">
+          <div><p class="eyebrow">THE PROBLEM</p><h2>Arrange the tiles to reach the goal.</h2><p>The 8-puzzle has eight numbered tiles and one empty space. Move one adjacent tile at a time until the board matches the goal state. This project demonstrates how Depth First Search explores possible states.</p></div>
+          <div class="example-states"><div><span class="field-label">INITIAL STATE</span><div class="intro-board"><span>2</span><span>8</span><span>3</span><span>1</span><span>6</span><span>4</span><span>7</span><span class="blank"></span><span>5</span></div></div><span class="example-arrow">→</span><div><span class="field-label">GOAL STATE</span><div class="intro-board goal-board"><span>1</span><span>2</span><span>3</span><span>8</span><span class="blank"></span><span>4</span><span>7</span><span>6</span><span>5</span></div></div></div>
+        </div>
+        <div class="home-footer"><span>Student: <strong>Medha Goel</strong></span><span>Built with HTML, CSS and JavaScript</span></div>
+      </section>
+
+      <section class="page" id="page-lab">
+        <div class="page-heading"><div><span class="eyebrow">PUZZLE WORKSPACE</span><h1>Make a move.</h1><p>Configure a puzzle, run DFS, and step through the solution.</p></div><span class="algorithm-pill"><span class="status-dot"></span> DFS · Assigned algorithm</span></div>
+        <div class="lab-layout">
+          <div class="panel setup-panel"><div class="panel-heading"><div><span class="section-number">01</span><h2>Set up your board</h2></div><span class="tiny-label">3 × 3 GRID</span></div><p class="panel-help">Enter each row as three digits. Use <b>0</b> for the blank tile.</p><div class="input-boards"><div><label class="field-label" for="startInput">INITIAL STATE</label><input class="board-input" id="startInput" value="283164705" maxlength="9" aria-describedby="startHint" /><small id="startHint">Example: 283 / 164 / 705</small></div><div><label class="field-label" for="goalInput">GOAL STATE</label><input class="board-input" id="goalInput" value="123804765" maxlength="9" /><small>Each digit 0–8 exactly once</small></div></div><div class="setup-actions"><button class="btn btn-random" id="randomBtn"><span class="random-icon">⤨</span><span><strong>Random solvable puzzle</strong><small>Generate a new puzzle automatically</small></span></button><button class="btn btn-text" id="exampleBtn">Load example</button></div><div class="algorithm-setting"><div><label class="field-label">SEARCH ALGORITHM</label><strong>Depth First Search (DFS)</strong><small>Only the assigned algorithm is implemented.</small></div><span class="lock-icon">⌑</span></div><div class="notice"><span>ⓘ</span><p>DFS explores one branch deeply before backtracking. It does not guarantee the shortest solution.</p></div><div id="inputError" class="error-message" role="alert"></div><button class="btn btn-dark btn-full" id="solveBtn">Find solution <span>→</span></button></div>
+          <div class="panel board-panel"><div class="panel-heading"><div><span class="section-number">02</span><h2>Board preview</h2></div><span class="tiny-label" id="boardStatus">READY TO SOLVE</span></div><div class="board-preview-grid"><div class="board-preview-block"><label class="field-label">INITIAL</label><div class="puzzle-board" id="initialBoard"></div></div><div class="board-arrow">→</div><div class="board-preview-block"><label class="field-label">GOAL</label><div class="puzzle-board goal-style" id="goalBoard"></div></div></div><div class="current-state-block"><div class="current-state-head"><div><label class="field-label">CURRENT STATE</label><p id="currentStateLabel">Waiting for search</p></div><span class="step-badge" id="stepBadge">STEP 0</span></div><div class="puzzle-board current-board" id="currentBoard"></div><div class="blank-legend"><span class="blank-swatch"></span><span><strong>Blank space</strong> — the empty green cell</span></div><div class="move-explanation" id="moveExplanation"><strong>Starting board</strong><span>The empty green cell is the blank space. It can swap with an adjacent tile.</span></div></div><div class="playback-controls"><button class="control-btn" id="previousBtn" title="Previous step" disabled>←</button><button class="btn btn-green" id="runBtn">▶ Run search</button><button class="control-btn" id="nextBtn" title="Next step" disabled>→</button><button class="control-btn" id="resetBtn" title="Reset">↺</button><label class="speed-control">SPEED<select id="speedSelect"><option value="1200">Slow</option><option value="650" selected>Normal</option><option value="250">Fast</option></select></label></div><div class="progress-track"><div id="progressBar"></div></div><div class="playback-caption"><span id="playbackText">Set your puzzle, then find a solution.</span><span id="stepCounter">0 / 0</span></div></div>
+        </div>
+        <div class="stats-grid"><div class="stat-card"><span class="stat-label">NODES GENERATED</span><strong id="statGenerated">—</strong><span class="stat-foot">States discovered</span></div><div class="stat-card"><span class="stat-label">NODES EXPANDED</span><strong id="statExpanded">—</strong><span class="stat-foot">States explored</span></div><div class="stat-card"><span class="stat-label">SOLUTION DEPTH</span><strong id="statDepth">—</strong><span class="stat-foot">Moves in path</span></div><div class="stat-card"><span class="stat-label">EXECUTION TIME</span><strong id="statTime">—</strong><span class="stat-foot">Approx. browser time</span></div></div>
+        <div class="panel solution-panel"><div class="panel-heading"><div><span class="section-number">03</span><h2>Solution path</h2></div><span id="solutionStatus" class="result-pill neutral">Not run yet</span></div><p class="panel-help">Every tile movement from the initial board to the goal. Select a step to preview it.</p><div id="solutionPath" class="solution-path empty-state">Your solution path will appear here after DFS finishes.</div></div>
+      </section>
+
+      <section class="page" id="page-process">
+        <div class="page-heading"><div><span class="eyebrow">UNDER THE HOOD</span><h1>Watch the search.</h1><p>Explore the frontier and explored set as DFS visits states.</p></div><button class="btn btn-dark" data-go="lab">Configure puzzle ↗</button></div>
+        <div class="panel process-inspector"><div class="process-inspector-head"><div><span class="section-number">↔</span><div><h2>Inspect a search event</h2><p class="panel-help">Move through the recorded DFS expansions independently of the final solution path.</p></div></div><span class="step-badge" id="eventBadge">EVENT 0</span></div><input type="range" id="eventRange" min="0" max="0" value="0" aria-label="Search event index" /><div class="playback-caption"><span id="eventRangeStart">Search not run</span><span id="eventRangeEnd">0 events</span></div></div><div class="process-summary"><div><span class="tiny-label">CURRENT NODE</span><div id="processCurrent" class="mono-value">Not started</div></div><div><span class="tiny-label">SEARCH DEPTH</span><div id="processDepth" class="mono-value">—</div></div><div><span class="tiny-label">PARENT NODE</span><div id="processParent" class="mono-value">—</div></div><div><span class="tiny-label">PATH COST</span><div id="processCost" class="mono-value">—</div></div></div>
+        <div class="process-columns"><div class="panel"><div class="panel-heading"><div><span class="section-number">A</span><h2>Generated successors</h2></div><span class="tiny-label" id="successorCount">0 STATES</span></div><p class="panel-help">Valid states produced by moving the blank one space.</p><div id="successorList" class="state-list empty-state">Run DFS in the Puzzle Lab to see successor states.</div></div><div class="panel"><div class="panel-heading"><div><span class="section-number">B</span><h2>Frontier · Open list</h2></div><span class="tiny-label" id="frontierCount">0 STATES</span></div><p class="panel-help">Discovered states waiting to be expanded. DFS uses a stack (last in, first out).</p><div id="frontierList" class="compact-state-list empty-state">No frontier data yet.</div></div><div class="panel"><div class="panel-heading"><div><span class="section-number">C</span><h2>Explored · Closed list</h2></div><span class="tiny-label" id="exploredCount">0 STATES</span></div><p class="panel-help">States already visited and expanded.</p><div id="exploredList" class="compact-state-list empty-state">No explored states yet.</div></div></div>
+        <div class="panel log-panel"><div class="panel-heading"><div><span class="section-number">D</span><h2>Search event log</h2></div><span class="tiny-label">LATEST EVENTS FIRST</span></div><div class="table-scroll"><table class="data-table"><thead><tr><th>#</th><th>Event</th><th>State</th><th>Parent</th><th>Depth</th><th>Details</th></tr></thead><tbody id="eventLog"><tr><td colspan="6" class="empty-table">Run a search to populate the event log.</td></tr></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-comparison">
+        <div class="page-heading"><div><span class="eyebrow">SEARCH STRATEGIES</span><h1>Different ways to explore.</h1><p>Compare the main properties of the algorithms in the assignment.</p></div><span class="algorithm-pill"><span class="status-dot"></span> DFS implementation</span></div>
+        <div class="panel comparison-panel"><div class="panel-heading"><div><span class="section-number">01</span><h2>Algorithm comparison</h2></div><span class="tiny-label">QUALITATIVE OVERVIEW</span></div><p class="panel-help">Only DFS is implemented in this individual project, as required by the assigned-algorithm rule. Other algorithms are shown for academic comparison, not as measured results.</p><div class="table-scroll"><table class="data-table comparison-table"><thead><tr><th>Algorithm</th><th>Strategy</th><th>Complete?</th><th>Optimal?</th><th>Typical space</th><th>Project status</th></tr></thead><tbody>
+          <tr class="highlight-row"><td><strong>DFS</strong><span class="sub-cell">Depth First Search</span></td><td>Deep branch first</td><td><span class="yes-tag">Yes*</span></td><td><span class="no-tag">No</span></td><td>O(bm)</td><td><span class="implemented-tag">Implemented</span></td></tr>
+          <tr><td><strong>BFS</strong><span class="sub-cell">Breadth First Search</span></td><td>Shallowest first</td><td><span class="yes-tag">Yes</span></td><td><span class="yes-tag">Yes*</span></td><td>O(bᵈ)</td><td><span class="planned-tag">Reference only</span></td></tr>
+          <tr><td><strong>DLS</strong><span class="sub-cell">Depth Limited Search</span></td><td>DFS with a limit</td><td><span class="conditional-tag">If limit permits</span></td><td><span class="no-tag">No</span></td><td>O(bℓ)</td><td><span class="planned-tag">Reference only</span></td></tr>
+          <tr><td><strong>IDDFS</strong><span class="sub-cell">Iterative Deepening DFS</span></td><td>Repeated depth limits</td><td><span class="yes-tag">Yes</span></td><td><span class="yes-tag">Yes*</span></td><td>O(bd)</td><td><span class="planned-tag">Reference only</span></td></tr>
+          <tr><td><strong>UCS</strong><span class="sub-cell">Uniform Cost Search</span></td><td>Lowest path cost first</td><td><span class="yes-tag">Yes*</span></td><td><span class="yes-tag">Yes*</span></td><td>O(b^(1+⌊C*/ε⌋))</td><td><span class="planned-tag">Reference only</span></td></tr>
+          <tr><td><strong>GBFS</strong><span class="sub-cell">Greedy Best-First</span></td><td>Lowest heuristic first</td><td><span class="conditional-tag">Not always</span></td><td><span class="no-tag">No</span></td><td>O(bᵐ)</td><td><span class="planned-tag">Reference only</span></td></tr>
+          <tr><td><strong>A*</strong><span class="sub-cell">A-star search</span></td><td>Lowest g(n) + h(n)</td><td><span class="yes-tag">Yes*</span></td><td><span class="yes-tag">Yes*</span></td><td>Exponential</td><td><span class="planned-tag">Reference only</span></td></tr>
+        </tbody></table></div><p class="table-footnote">b = branching factor, d = shallowest solution depth, m = maximum depth, ℓ = depth limit. Asterisks indicate assumptions such as finite branching, suitable costs, and/or graph-search duplicate handling.</p></div>
+        <div class="comparison-bottom"><div class="panel"><span class="feature-icon mint">✓</span><h3>What is measured?</h3><p>When you run DFS, the lab reports its actual node counts, solution depth, execution time and an approximate memory estimate for that run.</p></div><div class="panel"><span class="feature-icon peach">≠</span><h3>What is not fabricated?</h3><p>The table does not invent timing or node counts for algorithms that this submission does not execute.</p></div></div>
+      </section>
+
+      <section class="page" id="page-guide">
+        <div class="page-heading"><div><span class="eyebrow">ALGORITHM NOTES</span><h1>Meet Depth First Search.</h1><p>A simple strategy with a very particular way of exploring.</p></div><span class="algorithm-pill"><span class="status-dot"></span> Assigned · Algorithm 2</span></div>
+        <div class="guide-hero"><div><span class="eyebrow">THE CORE IDEA</span><h2>Go deeper.<br /><em>Then backtrack.</em></h2><p>DFS follows one branch of the search tree as far as it can. When it reaches a dead end, it returns to the most recent state with unexplored options.</p></div><div class="tree-illustration"><div class="tree-node root-node">S</div><div class="tree-lines"><i></i><i></i><i></i></div><div class="tree-level"><span class="tree-node">A</span><span class="tree-node chosen-node">B</span><span class="tree-node">C</span></div><div class="tree-lines lower"><i></i><i></i><i></i></div><div class="tree-level lower-level"><span class="tree-node muted-node">…</span><span class="tree-node chosen-node">D</span><span class="tree-node muted-node">…</span></div><div class="tree-caption">DFS follows the highlighted branch first</div></div></div>
+        <div class="guide-grid"><article class="panel guide-card"><span class="guide-icon mint">↘</span><h3>Working principle</h3><ol><li>Put the initial state on a stack.</li><li>Pop the most recently added state.</li><li>If it is the goal, stop.</li><li>Otherwise generate valid successor states.</li><li>Add unvisited successors to the stack and continue.</li></ol></article><article class="panel guide-card"><span class="guide-icon peach">＋</span><h3>Advantages</h3><ul><li>Often uses less memory than breadth-first search.</li><li>Can find a solution without exploring every shallow state first.</li><li>Simple to implement using a stack or recursion.</li></ul></article><article class="panel guide-card"><span class="guide-icon lilac">!</span><h3>Limitations</h3><ul><li>May follow a long, unhelpful branch.</li><li>Does not guarantee the shortest path.</li><li>Without cycle checks or limits, it can revisit states or search deeply.</li></ul></article><article class="panel guide-card"><span class="guide-icon mint">ƒ</span><h3>Complexity & properties</h3><div class="complexity-row"><span>Time complexity</span><strong>O(bᵐ)</strong></div><div class="complexity-row"><span>Space complexity</span><strong>O(bm)</strong></div><div class="complexity-row"><span>Completeness</span><strong>Yes, for finite graphs with visited-state checks</strong></div><div class="complexity-row"><span>Optimality</span><strong>No</strong></div><small class="muted">b = branching factor; m = maximum search depth. Exact memory use depends on the implementation.</small></article></div>
+        <div class="panel pseudocode-panel"><div class="panel-heading"><div><span class="section-number">PSEUDOCODE</span><h2>DFS in five lines</h2></div><button class="btn btn-outline btn-small" id="copyPseudo">Copy pseudocode</button></div><pre id="pseudocode">frontier ← stack containing initial state
+explored ← empty set
+while frontier is not empty:
+    state ← pop(frontier)
+    if state is goal: return solution path
+    if state not in explored: add state and push unvisited successors
+return failure</pre></div>
+      </section>
+      <footer class="global-footer"><span>eightfold <span class="footer-dot">●</span> 8-Puzzle Search Lab</span><span>Made with HTML, CSS & JavaScript · No UI framework</span></footer>
+    </main>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>
